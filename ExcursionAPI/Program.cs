@@ -8,12 +8,14 @@ using Domain.Wrapper;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Domain.Interfacess;
-
+using Microsoft.AspNetCore.Hosting;
 
 public class Program
 {
     public static void Main(string[] args)
     {
+        Console.Title = "IdentityServer";
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Настройка строки подключения
@@ -93,6 +95,9 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        // Конфигурация Kestrel
+        app.Urls.Add("http://localhost:5000");
 
         app.Run();
     }
