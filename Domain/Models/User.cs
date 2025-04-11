@@ -29,7 +29,7 @@ namespace Domain.Models
         public virtual ICollection<Order> Orders { get; } = new List<Order>();
         public virtual ICollection<ProviderService> ProviderServices { get; } = new List<ProviderService>();
         public virtual ICollection<Review> Reviews { get; } = new List<Review>();
-        public virtual Role? Role { get; set; }
+        public virtual Roles? Roles { get; set; }
         public virtual ICollection<Subscription> Subscriptions { get; } = new List<Subscription>();
         public virtual ICollection<Tour> TourGuides { get; } = new List<Tour>();
         public virtual ICollection<Tour> TourProviders { get; } = new List<Tour>();
