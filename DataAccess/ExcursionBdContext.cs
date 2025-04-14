@@ -25,7 +25,7 @@ public partial class ExcursionBdContext : DbContext
 
     public virtual DbSet<Review> Reviews { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
+    public virtual DbSet<Role> Roles1 { get; set; }
 
     public virtual DbSet<Statistic> Statistics { get; set; }
 
@@ -152,7 +152,7 @@ public partial class ExcursionBdContext : DbContext
         {
             entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE3A23BED8A5");
 
-            entity.HasIndex(e => e.RoleName, "UQ__Roles__8A2B61607B249946").IsUnique();
+            entity.HasIndex(e => e.RoleName, "UQ__Roless__8A2B61607B249946").IsUnique();
 
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.RoleName)

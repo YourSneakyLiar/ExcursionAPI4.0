@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\BusinessLogic\Helpers\AppSettings.cs" Link="AppSettings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="IdentityServer4" Version="1.5.2" />
     <PackageReference Include="MailKit" Version="4.11.0" />

@@ -30,6 +30,7 @@ namespace Domain.Models
         public virtual ICollection<ProviderService> ProviderServices { get; } = new List<ProviderService>();
         public virtual ICollection<Review> Reviews { get; } = new List<Review>();
         public virtual Roles? Roles { get; set; }
+        public virtual Role? Role { get; set; }
         public virtual ICollection<Subscription> Subscriptions { get; } = new List<Subscription>();
         public virtual ICollection<Tour> TourGuides { get; } = new List<Tour>();
         public virtual ICollection<Tour> TourProviders { get; } = new List<Tour>();
@@ -45,6 +46,7 @@ namespace Domain.Models
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
         public List<RefreshToken> RefreshTokens { get; set; }
+
 
         // Методы для интеграции с IdentityServer4
         public bool OwnsToken(string token)
