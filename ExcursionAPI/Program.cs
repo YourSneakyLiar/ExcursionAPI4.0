@@ -1,4 +1,4 @@
-using Domain.Interfaces;
+п»їusing Domain.Interfaces;
 using BusinessLogic.Services;
 using Domain.Models;
 using DataAccess.Wrapper;
@@ -8,39 +8,30 @@ using Domain.Wrapper;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Domain.Interfacess;
-using Microsoft.AspNetCore.Hosting;
 using BackendApi.Authorization;
 using BusinessLogic.Authorization;
 using BusinessLogic.Helpers;
-using BackendApi.Helpers;
-using MapsterMapper;
-using Microsoft.Extensions.DependencyInjection;
-using Mapster;
+
 
 public class Program
 {
-    public static async Task Main(string[] args) // Изменен тип возвращаемого значения на Task и добавлен async
+    public static void Main(string[] args)
     {
-        Console.Title = "IdentityServer";
-
         var builder = WebApplication.CreateBuilder(args);
 
-        // Настройка строки подключения
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ExcursionBdContext>(options => options.UseSqlServer(connectionString));
-
-        // configure strongly typed settings object
-        builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-        // В методе ConfigureServices или в Program.cs
-        builder.Services.AddMapster(); // Регистрация Mapster
-        builder.Services.AddSingleton<IMapper>(new Mapper()); // Регистрация IMapper
+        //// configure strongly typed settings object
+        //builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
         // configure DI for application services
-        builder.Services.AddScoped<IJwtUtils, JwtUtils>();
-        builder.Services.AddScoped<IAccountService, AccountsService>();
-        builder.Services.AddScoped<IEmailService, EmailService>();
+        //builder.Services.AddScoped<IJwtUtils, JwtUtils>();
+        //builder.Services.AddScoped<IAccountService, AccountsService>();
+        //builder.Services.AddScoped<IEmailService, EmailService>();
 
-        // Регистрация сервисов
+
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IComplaintService, ComplaintService>();
@@ -54,28 +45,26 @@ public class Program
         builder.Services.AddScoped<ITourLoadStatisticService, TourLoadStatisticService>();
         builder.Services.AddScoped<ITourService, TourService>();
 
-
-        // Настройка Swagger
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Swagger
         builder.Services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "Экскурсионное-бюро API",
-                Description = "Экскурсии по России API",
+                Title = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ API",
+                Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ API",
                 Contact = new OpenApiContact
                 {
-                    Name = "Пример контакта",
+                    Name = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                     Url = new Uri("https://gorbilet.com/msk/catalog/ekskursii-po-moskve/")
                 },
                 License = new OpenApiLicense
                 {
-                    Name = "Пример лицензии",
+                    Name = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                     Url = new Uri("https://example.com/license")
                 }
-            });
 
-            // Добавление настроек безопасности для JWT
+            });
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
@@ -86,36 +75,33 @@ public class Program
                 Type = SecuritySchemeType.ApiKey,
                 Scheme = "Bearer"
             });
-
-            // Добавление требования безопасности для всех эндпоинтов
             options.AddSecurityRequirement(new OpenApiSecurityRequirement()
-            {
-                {
-                    new OpenApiSecurityScheme
+                  {
                     {
+                      new OpenApiSecurityScheme
+                      {
                         Reference = new OpenApiReference
-                        {
+                          {
                             Type = ReferenceType.SecurityScheme,
                             Id = "Bearer"
-                        },
-                        Scheme = "oauth2",
-                        Name = "Bearer",
-                        In = ParameterLocation.Header
-                    },
-                    new List<string>()
-                }
-            });
+                          },
+                          Scheme = "oauth2",
+                          Name = "Bearer",
+                          In = ParameterLocation.Header,
 
-            // Подключение XML-комментариев
+                        },
+                        new List<string>()
+                      }
+                    });
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
         });
 
-        // Добавление контроллеров и Swagger
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Swagger
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
 
-        // Настройка CORS
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CORS
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", policy =>
@@ -126,7 +112,7 @@ public class Program
             });
         });
 
-        // Логирование
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         builder.Logging.ClearProviders();
         builder.Logging.AddConsole();
         builder.Logging.AddDebug();
@@ -144,33 +130,8 @@ public class Program
         app.UseCors("AllowAll");
         app.UseAuthorization();
 
-        // Global error handler
-        app.UseMiddleware<ErrorHandlerMiddleware>();
-
-        // Custom JWT auth middleware
-        app.UseMiddleware<JwtMiddleware>();
-
         app.MapControllers();
 
-        // Конфигурация Kestrel
-        app.Urls.Add("http://localhost:5000");
-
-        // Миграция базы данных
-        using (var scope = app.Services.CreateScope())
-        {
-            var services = scope.ServiceProvider;
-
-            var context = services.GetService<ExcursionBdContext>();
-            await context.Database.MigrateAsync(); // Теперь этот код работает корректно
-        }
-        //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        //if (string.IsNullOrEmpty(connectionString))
-        //{
-        //    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        //}
-
-        Console.WriteLine($"Connection String: {connectionString}");
-
-        await app.RunAsync(); // Изменен вызов Run на RunAsync
+        app.Run();
     }
 }
