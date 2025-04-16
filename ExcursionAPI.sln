@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcursionAPI", "ExcursionAPI\ExcursionAPI.csproj", "{42F52CA8-8A54-4910-B3D5-7110E8345456}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1511546C-A294-4DE0-8C80-34F583E8857A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{BCEE2BB4-1940-4B69-B41F-0FABFF2A32B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcursionClient", "ExcursionClient\ExcursionClient.csproj", "{53E08461-BA03-42F9-9AEA-8CB09A55F283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BCEE2BB4-1940-4B69-B41F-0FABFF2A32B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCEE2BB4-1940-4B69-B41F-0FABFF2A32B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCEE2BB4-1940-4B69-B41F-0FABFF2A32B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E08461-BA03-42F9-9AEA-8CB09A55F283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E08461-BA03-42F9-9AEA-8CB09A55F283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E08461-BA03-42F9-9AEA-8CB09A55F283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E08461-BA03-42F9-9AEA-8CB09A55F283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
